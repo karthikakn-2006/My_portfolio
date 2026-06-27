@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karthika K N — Cyber Security Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #050a0e;
+    --deep: #0a1628;
+    --panel: #0d1f35;
+    --border: #1a3a5c;
+    --cyan: #00e5ff;
+    --cyan-dim: #00b4cc;
+    --green: #00ff9d;
+    --green-dim: #00c878;
+    --red: #ff3c5a;
+    --text: #c8e6f5;
+    --muted: #6a9ab8;
+    --mono: 'Share Tech Mono', monospace;
+    --display: 'Rajdhani', sans-serif;
+    --body: 'Exo 2', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: var(--body);
+    overflow-x: hidden;
+  }
+
+  /* ── MATRIX CANVAS ── */
+  #matrix-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    opacity: 0.08;
+    pointer-events: none;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(5,10,14,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 60px;
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    color: var(--cyan);
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+  .nav-logo span { color: var(--green); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--display);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--cyan); }
+
+  .nav-status {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .status-dot {
+    width: 7px; height: 7px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 80px 80px 40px;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 60% 50% at 70% 50%, rgba(0,229,255,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(0,255,157,0.05) 0%, transparent 50%);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--green);
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: var(--green);
+  }
+
+  .hero h1 {
+    font-family: var(--display);
+    font-size: clamp(48px, 6vw, 80px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .hero h1 .accent { color: var(--cyan); }
+
+  .hero-sub {
+    font-family: var(--mono);
+    font-size: 15px;
+    color: var(--cyan-dim);
+    margin: 20px 0 28px;
+    letter-spacing: 1px;
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 540px;
+    margin-bottom: 36px;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--cyan);
+    border: none;
+    padding: 14px 32px;
+    cursor: pointer;
+    text-decoration: none;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover {
+    background: var(--green);
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    background: transparent;
+    border: 1px solid var(--cyan);
+    padding: 13px 32px;
+    cursor: pointer;
+    text-decoration: none;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .btn-outline:hover {
+    background: rgba(0,229,255,0.1);
+    transform: translateY(-2px);
+  }
+
+  /* ── HERO PHOTO CARD ── */
+  .hero-photo-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hex-frame {
+    position: relative;
+    width: 320px;
+    height: 360px;
+  }
+
+  .hex-frame::before,
+  .hex-frame::after {
+    content: '';
+    position: absolute;
+    border: 1px solid var(--cyan);
+    opacity: 0.3;
+  }
+  .hex-frame::before {
+    inset: -12px;
+    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+  }
+  .hex-frame::after {
+    inset: -24px;
+    clip-path: polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px);
+    border-color: var(--green);
+    opacity: 0.15;
+  }
+
+  .hero-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+    filter: grayscale(20%) contrast(1.1);
+  }
+
+  .scan-line {
+    position: absolute;
+    left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    opacity: 0.6;
+    animation: scan 3s linear infinite;
+  }
+
+  .hero-stats {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 16px 20px;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+  }
+  .stat-item { margin-bottom: 8px; }
+  .stat-item:last-child { margin-bottom: 0; }
+  .stat-val {
+    font-family: var(--mono);
+    font-size: 20px;
+    color: var(--cyan);
+    display: block;
+  }
+  .stat-label {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  /* ── SECTION WRAPPER ── */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 80px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-full {
+    max-width: 100%;
+    background: var(--deep);
+    padding: 80px 0;
+  }
+  .section-full > .inner { max-width: 1200px; margin: 0 auto; padding: 0 80px; }
+
+  .sec-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .sec-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--green);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .sec-title {
+    font-family: var(--display);
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .sec-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* ── ABOUT / TERMINAL ── */
+  .terminal {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+    overflow: hidden;
+  }
+  .terminal-bar {
+    background: rgba(0,229,255,0.06);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .t-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .t-red { background: #ff3c5a; }
+  .t-yellow { background: #ffc107; }
+  .t-green { background: var(--green); }
+  .terminal-body { padding: 28px 28px; font-family: var(--mono); font-size: 14px; line-height: 2; }
+  .t-prompt { color: var(--green); }
+  .t-cmd { color: var(--cyan); }
+  .t-out { color: var(--text); display: block; padding-left: 16px; }
+  .t-key { color: var(--green); }
+  .t-val { color: var(--cyan-dim); }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .skill-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 20px;
+    position: relative;
+    transition: border-color 0.2s, transform 0.2s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+  }
+  .skill-card:hover {
+    border-color: var(--cyan);
+    transform: translateY(-3px);
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--cyan);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .skill-card:hover::before { opacity: 1; }
+
+  .skill-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .skill-name {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .skill-bar-wrap {
+    height: 3px;
+    background: var(--border);
+    margin-top: 10px;
+  }
+  .skill-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cyan), var(--green));
+    transition: width 1.2s ease;
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .project-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  }
+  .project-card:hover { border-color: var(--cyan); }
+
+  .project-card::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 100px; height: 100px;
+    background: radial-gradient(circle, rgba(0,229,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .project-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .project-title {
+    font-family: var(--display);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 16px;
+  }
+  .project-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+  .project-bullets { list-style: none; }
+  .project-bullets li {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text);
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(26,58,92,0.5);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .project-bullets li::before { content: '▶'; color: var(--cyan); font-size: 8px; margin-top: 3px; flex-shrink: 0; }
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--cyan);
+    text-decoration: none;
+    margin-top: 16px;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+  .project-link:hover { color: var(--green); }
+
+  /* ── CERTS ── */
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .cert-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: all 0.2s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    text-decoration: none;
+    color: inherit;
+  }
+  .cert-card:hover {
+    border-color: var(--green);
+    transform: translateY(-2px);
+  }
+
+  .cert-badge {
+    width: 36px; height: 36px;
+    background: rgba(0,255,157,0.1);
+    border: 1px solid var(--green-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+  .cert-title {
+    font-family: var(--display);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .cert-issuer {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+  .cert-date {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--green);
+    margin-top: auto;
+  }
+
+  /* ── EDUCATION ── */
+  .edu-timeline { position: relative; padding-left: 32px; }
+  .edu-timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, var(--cyan), var(--green), transparent);
+  }
+
+  .edu-item {
+    position: relative;
+    margin-bottom: 36px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+    transition: border-color 0.2s;
+  }
+  .edu-item:hover { border-color: var(--cyan); }
+
+  .edu-item::before {
+    content: '';
+    position: absolute;
+    left: -27px;
+    top: 24px;
+    width: 12px; height: 12px;
+    background: var(--cyan);
+    border: 2px solid var(--deep);
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  }
+
+  .edu-degree {
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 6px;
+  }
+  .edu-school {
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .edu-meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .edu-meta span {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .edu-meta .highlight { color: var(--green); }
+
+  /* ── EXTRAS ── */
+  .extras-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .extra-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 20px;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    transition: border-color 0.2s;
+  }
+  .extra-card:hover { border-color: var(--green); }
+  .extra-title {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .extra-detail {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .extra-grade {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--green);
+    margin-top: 8px;
+  }
+
+  /* ── CONTACT ── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s;
+  }
+  .contact-item:hover { border-color: var(--cyan); }
+
+  .contact-icon {
+    width: 40px; height: 40px;
+    background: rgba(0,229,255,0.08);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .contact-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+    display: block;
+  }
+  .contact-val {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--cyan);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 28px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+  footer span { color: var(--cyan); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  @keyframes scan {
+    0% { top: 0; }
+    100% { top: 100%; }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes glitch {
+    0%,100% { text-shadow: none; }
+    20% { text-shadow: 2px 0 var(--red), -2px 0 var(--cyan); }
+    40% { text-shadow: -2px 0 var(--red), 2px 0 var(--green); }
+    60% { text-shadow: none; }
+  }
+
+  .hero h1 { animation: glitch 6s infinite; }
+
+  .fade-up { animation: fadeUp 0.7s ease forwards; }
+
+  /* ── GLITCH DIVIDER ── */
+  .glitch-divider {
+    position: relative;
+    z-index: 1;
+    padding: 0 80px;
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+  .glitch-divider hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), var(--cyan-dim), var(--border), transparent);
+  }
+
+  /* responsive */
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 80px 24px 40px; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .hex-frame { width: 240px; height: 270px; }
+    section { padding: 60px 24px; }
+    .section-full > .inner { padding: 0 24px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="matrix-bg"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">[<span>KKN</span>]_CYBERSEC</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certs">Certs</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-status"><div class="status-dot"></div> SYSTEM ONLINE</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="about">
+  <div class="hero-grid">
+    <div class="fade-up">
+      <div class="hero-eyebrow">CYBERSECURITY STUDENT</div>
+      <h1>KARTHIKA<br><span class="accent">K N</span></h1>
+      <div class="hero-sub">// Security Analyst & Ethical Hacker</div>
+      <p class="hero-desc">
+        Cyber Security student with hands-on experience in Kali Linux, SQLMap, phishing simulation, and penetration testing. Proficient in Python, Java, C++, and MySQL — seeking an entry-level role in vulnerability assessment and network security.
+      </p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="#contact" class="btn-outline">Get In Touch</a>
+      </div>
+    </div>
+
+    <div class="hero-photo-wrap">
+      <div class="hex-frame">
+        <img src="C:\Users\karthika\Downloads\karthika.jpeg" alt="Karthika K N" class="hero-photo">
+        <div class="scan-line"></div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-val">7.90</span>
+          <span class="stat-label">CGPA</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-val">2+</span>
+          <span class="stat-label">Projects</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-val">4+</span>
+          <span class="stat-label">Certs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT TERMINAL -->
+<section>
+  <div class="sec-header">
+    <span class="sec-tag">01</span>
+    <h2 class="sec-title">Profile</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="terminal">
+    <div class="terminal-bar">
+      <div class="t-dot t-red"></div>
+      <div class="t-dot t-yellow"></div>
+      <div class="t-dot t-green"></div>
+      <span style="margin-left:8px">karthika@cybersec ~ bash</span>
+    </div>
+    <div class="terminal-body">
+      <div><span class="t-prompt">karthika@system:~$</span> <span class="t-cmd">whoami --verbose</span></div>
+      <span class="t-out"><span class="t-key">name</span>      : <span class="t-val">Karthika K N</span></span>
+      <span class="t-out"><span class="t-key">location</span>  : <span class="t-val">Tirupur, Tamil Nadu, India</span></span>
+      <span class="t-out"><span class="t-key">degree</span>    : <span class="t-val">BSc Computer Science with Cyber Security (3rd Year)</span></span>
+      <span class="t-out"><span class="t-key">college</span>   : <span class="t-val">Vellalar College for Women, Erode</span></span>
+      <span class="t-out"><span class="t-key">cgpa</span>      : <span class="t-val">7.90</span></span>
+      <span class="t-out"><span class="t-key">focus</span>     : <span class="t-val">Penetration Testing · Network Security · Ethical Hacking</span></span>
+      <span class="t-out"><span class="t-key">tools</span>     : <span class="t-val">Kali Linux · SQLMap · Nmap · Wireshark · Burp Suite</span></span>
+      <br>
+      <div><span class="t-prompt">karthika@system:~$</span> <span class="t-cmd">cat mission.txt</span></div>
+      <span class="t-out" style="color:var(--text); font-size:13px; line-height:1.9">Seeking an entry-level Cyber Security or Security Analyst role<br>to apply technical expertise in vulnerability assessment, network<br>security, and ethical hacking to protect digital infrastructure.</span>
+    </div>
+  </div>
+</section>
+
+<div class="glitch-divider"><hr></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="sec-header">
+    <span class="sec-tag">02</span>
+    <h2 class="sec-title">Skills & Arsenal</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <span class="skill-icon">🛡️</span>
+      <div class="skill-name">Network Security</div>
+      <div style="font-size:11px;color:var(--muted);font-family:var(--mono)">CISCO Packet Tracer</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">💉</span>
+      <div class="skill-name">SQL Injection</div>
+      <div style="font-size:11px;color:var(--muted);font-family:var(--mono)">Ethical Hacking · SQLMap</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">🐍</span>
+      <div class="skill-name">Python</div>
+      <div style="font-size:11px;color:var(--muted);font-family:var(--mono)">Scripting · Automation</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">☕</span>
+      <div class="skill-name">Java & OOPs</div>
+      <div style="font-size:11px;color:var(--muted);font-family:var(--mono)">Core Java · OOP Concepts</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">🗄️</span>
+      <div class="skill-name">MySQL</div>
+      <div style="font-size:11px;color:var(--muted);font-family:var(--mono)">Database Management</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">⚙️</span>
+      <div class="skill-name">Data Structures</div>
+      <div style="font-size:11px;color:var(--muted);font-family:var(--mono)">C Language</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">🔍</span>
+      <div class="skill-name">Pen Testing</div>
+      <div style="font-size:11px;color:var(--muted);font-family:var(--mono)">Kali Linux · Nmap · Wireshark</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:78%"></div></div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">🧠</span>
+      <div class="skill-name">Problem Solving</div>
+      <div style="font-size:11px;color:var(--muted);font-family:var(--mono)">Leadership · Analytics</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="glitch-divider"><hr></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sec-header">
+    <span class="sec-tag">03</span>
+    <h2 class="sec-title">Projects</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <span class="project-tag">// OFFENSIVE SECURITY</span>
+      <div class="project-title">Data Scouting & Penetration Testing</div>
+      <p class="project-desc">Full-cycle SQL injection penetration test in a controlled Kali Linux lab environment — from reconnaissance to remediation reporting.</p>
+      <ul class="project-bullets">
+        <li>Conducted SQL Injection testing using SQLMap in Kali Linux within a controlled lab setup</li>
+        <li>Identified database vulnerabilities and analyzed tables, columns, and security weaknesses</li>
+        <li>Recommended preventive measures: input validation, parameterized queries, secure coding</li>
+      </ul>
+      <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
+        <span style="font-family:var(--mono);font-size:10px;color:var(--cyan);background:rgba(0,229,255,0.07);border:1px solid var(--border);padding:4px 10px;">KALI LINUX</span>
+        <span style="font-family:var(--mono);font-size:10px;color:var(--green);background:rgba(0,255,157,0.07);border:1px solid var(--border);padding:4px 10px;">SQLMAP</span>
+        <span style="font-family:var(--mono);font-size:10px;color:var(--muted);background:rgba(26,58,92,0.3);border:1px solid var(--border);padding:4px 10px;">MYSQL</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <span class="project-tag">// NETWORK RECON</span>
+      <div class="project-title">IP Tracking & AI Hacking</div>
+      <p class="project-desc">Network reconnaissance and ethical exploitation project using industry-standard tools to map, analyze, and secure network infrastructure.</p>
+      <ul class="project-bullets">
+        <li>Performed IP tracking and reconnaissance using Kali Linux tools</li>
+        <li>Conducted network scanning and vulnerability analysis with Nmap and Wireshark</li>
+        <li>Demonstrated ethical exploitation and implemented security measures using GitHub tools</li>
+      </ul>
+      <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
+        <span style="font-family:var(--mono);font-size:10px;color:var(--cyan);background:rgba(0,229,255,0.07);border:1px solid var(--border);padding:4px 10px;">NMAP</span>
+        <span style="font-family:var(--mono);font-size:10px;color:var(--green);background:rgba(0,255,157,0.07);border:1px solid var(--border);padding:4px 10px;">WIRESHARK</span>
+        <span style="font-family:var(--mono);font-size:10px;color:var(--muted);background:rgba(26,58,92,0.3);border:1px solid var(--border);padding:4px 10px;">KALI LINUX</span>
+      </div>
+      <a href="https://canva.link/b3hx71on4y7pi74" target="_blank" class="project-link">▶ VIEW PROJECT DETAILS →</a>
+    </div>
+
+  </div>
+</section>
+
+<div class="glitch-divider"><hr></div>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="sec-header">
+    <span class="sec-tag">04</span>
+    <h2 class="sec-title">Certifications</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="certs-grid">
+
+    <a href="https://canva.link/b3hx71on4y7pi74" target="_blank" class="cert-card">
+      <div class="cert-badge">🏅</div>
+      <div class="cert-title">HTML & Java</div>
+      <div class="cert-issuer">ONLINE CERTIFICATION</div>
+      <div class="cert-date">📅 2024 — CLICK TO VIEW ↗</div>
+    </a>
+
+    <a href="https://canva.link/b3hx71on4y7pi74" target="_blank" class="cert-card">
+      <div class="cert-badge">🎓</div>
+      <div class="cert-title">Conference Certificate</div>
+      <div class="cert-issuer">NGP ARS & SCIENCE COLLEGE, COIMBATORE</div>
+      <div class="cert-date">📅 24 / 02 / 2025 — CLICK TO VIEW ↗</div>
+    </a>
+
+    <a href="https://canva.link/b3hx71on4y7pi74" target="_blank" class="cert-card">
+      <div class="cert-badge">📜</div>
+      <div class="cert-title">National Seminar</div>
+      <div class="cert-issuer">VELLALAR COLLEGE FOR WOMEN, ERODE</div>
+      <div class="cert-date">📅 21–22 / 08 / 2025 — CLICK TO VIEW ↗</div>
+    </a>
+
+    <a href="https://canva.link/b3hx71on4y7pi74" target="_blank" class="cert-card">
+      <div class="cert-badge">⚡</div>
+      <div class="cert-title">C, C++ & Programming Techniques</div>
+      <div class="cert-issuer">BHARATHIDASAN UNIVERSITY</div>
+      <div class="cert-date">📅 BHARATHIDASAN UNIVERSITY — CLICK TO VIEW ↗</div>
+    </a>
+
+  </div>
+</section>
+
+<div class="glitch-divider"><hr></div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="sec-header">
+    <span class="sec-tag">05</span>
+    <h2 class="sec-title">Education</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="edu-timeline">
+
+    <div class="edu-item">
+      <div class="edu-degree">BSc Computer Science with Cyber Security</div>
+      <div class="edu-school">Vellalar College for Women, Erode</div>
+      <div class="edu-meta">
+        <span class="highlight">CGPA: 7.55</span>
+        <span>Currently 2nd Year</span>
+        <span>Undergraduate</span>
+      </div>
+    </div>
+
+    <div class="edu-item">
+      <div class="edu-degree">Higher Secondary (XII)</div>
+      <div class="edu-school">APS Academy High School, Tirupur</div>
+      <div class="edu-meta">
+        <span class="highlight">75%</span>
+        <span>2023–24</span>
+      </div>
+    </div>
+
+    <div class="edu-item">
+      <div class="edu-degree">Secondary School (X)</div>
+      <div class="edu-school">APS Academy MHSS, Tirupur</div>
+      <div class="edu-meta">
+        <span class="highlight">75%</span>
+        <span>2023–24</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="glitch-divider"><hr></div>
+
+<!-- EXTRA CURRICULAR -->
+<section>
+  <div class="sec-header">
+    <span class="sec-tag">06</span>
+    <h2 class="sec-title">Extra Curricular</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="extras-grid">
+    <div class="extra-card">
+      <div class="extra-title">✂️ Tailoring</div>
+      <div class="extra-detail">July 2025 – October 2025</div>
+      <div class="extra-grade">Grade: A+</div>
+    </div>
+    <div class="extra-card">
+      <div class="extra-title">🧘 Yoga</div>
+      <div class="extra-detail">19 May 2015 – 23 May 2015<br>Certified Participant</div>
+    </div>
+    <div class="extra-card">
+      <div class="extra-title">🌿 NSS Club</div>
+      <div class="extra-detail">Youth for Cleanliness Drive<br>29 Oct 2022 – 04 Nov 2022</div>
+    </div>
+    <div class="extra-card">
+      <div class="extra-title">✍️ Kavithai</div>
+      <div class="extra-detail">Tamil Poetry Competition<br>2014</div>
+      <div class="extra-grade">🏆 2nd Prize</div>
+    </div>
+  </div>
+</section>
+
+<div class="glitch-divider"><hr></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-header">
+    <span class="sec-tag">07</span>
+    <h2 class="sec-title">Contact</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <p style="font-family:var(--mono);font-size:13px;color:var(--muted);line-height:1.9;margin-bottom:28px">
+        Open to internship opportunities and entry-level Cyber Security roles.<br>
+        Let's connect and build something secure together.
+      </p>
+      <a href="tel:+919626846364" class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <span class="contact-label">Phone</span>
+          <span class="contact-val">+91 96268 46364</span>
+        </div>
+      </a>
+      <a href="mailto:karthikakn07@gmail.com" class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <span class="contact-label">Email</span>
+          <span class="contact-val">karthikakn07@gmail.com</span>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/karthika04122006" target="_blank" class="contact-item">
+        <div class="contact-icon">🔗</div>
+        <div>
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-val">karthika04122006</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="t-dot t-red"></div>
+        <div class="t-dot t-yellow"></div>
+        <div class="t-dot t-green"></div>
+        <span style="margin-left:8px">status_check.sh</span>
+      </div>
+      <div class="terminal-body" style="line-height:2.2">
+        <div><span class="t-prompt">$</span> <span class="t-cmd">ping karthika.dev</span></div>
+        <span class="t-out">64 bytes from <span class="t-val">karthika.kn</span>: icmp_seq=1 time=<span class="t-key">1ms</span></span>
+        <span class="t-out">Status: <span class="t-key">AVAILABLE FOR OPPORTUNITIES</span></span>
+        <br>
+        <div><span class="t-prompt">$</span> <span class="t-cmd">cat availability.conf</span></div>
+        <span class="t-out">Internship_Ready : <span class="t-val">true</span></span>
+        <span class="t-out">Entry_Level_Role  : <span class="t-val">true</span></span>
+        <span class="t-out">Location          : <span class="t-val">Tirupur, Tamil Nadu</span></span>
+        <span class="t-out">Response_Time     : <span class="t-val">&lt; 24 hours</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>KARTHIKA K N</span>
+  <span>// Cyber Security Portfolio · Built with passion & precision</span>
+  <span>© 2026</span>
+</footer>
+
+<script>
+// Matrix rain
+const canvas = document.getElementById('matrix-bg');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const chars = '01アイウエオカキクケコサシスセソタチツテト∑Ω∆ΦΨABCDEF0123456789';
+const fontSize = 13;
+let columns = Math.floor(canvas.width / fontSize);
+let drops = Array(columns).fill(1);
+
+function draw() {
+  ctx.fillStyle = 'rgba(5,10,14,0.05)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#00e5ff';
+  ctx.font = fontSize + 'px Share Tech Mono';
+  for (let i = 0; i < drops.length; i++) {
+    const ch = chars[Math.floor(Math.random() * chars.length)];
+    ctx.fillStyle = Math.random() > 0.95 ? '#00ff9d' : '#00e5ff';
+    ctx.fillText(ch, i * fontSize, drops[i] * fontSize);
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+    drops[i]++;
+  }
+}
+setInterval(draw, 40);
+
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.skill-card, .project-card, .cert-card, .edu-item, .extra-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease, border-color 0.2s';
+  observer.observe(el);
+});
+
+// Skill bars animate on scroll
+const barObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.skill-bar').forEach(b => {
+        const w = b.style.width;
+        b.style.width = '0';
+        setTimeout(() => b.style.width = w, 100);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.skills-grid').forEach(g => barObserver.observe(g));
+</script>
+
+</body>
+</html>
