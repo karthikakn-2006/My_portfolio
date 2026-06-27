@@ -1,2 +1,3 @@
-# My_portfolio
-✅ Strong Points1. Good Technical Foundation  Kali Linux, SQLMap, Nmap, Wireshark — ithellam real tools, real experience. Recruiters-ku impress aagum.2. Projects are Practical  SQL Injection + IP Tracking — lab-based aagilum, hands-on proof iruku. That's better than zero projects.
+<img width="1400" height="788" alt="image" src="https://github.com/user-attachments/assets/52b537ac-3add-4f5d-b02a-02875c948bbc" />
+<br> <br>
+<img width="1440" height="2182" alt="image" src="https://github.com/user-attachments/assets/e329f357-9934-476d-8fbc-49a0b2d5abf8" />
